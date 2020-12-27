@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.LapKeHoachFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/nganSach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/budget"
+                android:layout_marginRight="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ngân sách"
+                    android:textColor="#05B161"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:textSize="17sp"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tạo ngân sách cho từng nhóm, hoặc cho cả ví"
+                    android:textColor="#a9a9a9"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:textSize="15sp"
+                    />
+
+                <!--so our layout is set-->
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/suKien"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/event"
+                android:layout_marginRight="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sự kiện"
+                    android:textColor="#05B161"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:textSize="17sp"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tạo một sự kiện trong ứng dụng để theo dõi việc chi tiêu trong một sự kiện có thực nào đó , ví dụ như du lịch cuối tuần"
+                    android:textColor="#a9a9a9"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:textSize="15sp"
+                    />
+
+                <!--so our layout is set-->
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/hoaDon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/invoice"
+                android:layout_marginRight="10dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hóa Đơn"
+                    android:textColor="#05B161"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:textSize="17sp"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Theo dõi hóa đơn của bạn như tiền điện, tiền nước, thuê bao..."
+                    android:textColor="#a9a9a9"
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:textSize="15sp"
+                    />
+
+                <!--so our layout is set-->
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+</FrameLayout>

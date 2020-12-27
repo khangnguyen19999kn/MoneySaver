@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+    android:title="Sổ giao dịch"
+    android:id="@+id/sogiaodich"
+    android:icon="@drawable/ic_sogiaodich"
+    app:cnb_backgroundColor="@color/colorPrimary"
+    app:cnb_iconColor="#ffffff"
+    app:cnb_iconTintMode="src_in"
+    app:cnb_textColor="#ffffff"/>
+    <item
+        android:title="Báo cáo"
+        android:id="@+id/baocao"
+        android:icon="@drawable/ic_baocao"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="#ffffff"/>
+    <item android:title="Thêm Giao Dịch"
+        android:id="@+id/themgiaodich"
+        android:icon="@drawable/ic_themgiaodich"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="#ffffff"
+        ></item>
+    <item
+        android:title="Lập kế hoạch"
+        android:id="@+id/lapkehoach"
+        android:icon="@drawable/ic_lapkehoach"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="#ffffff"/>
+
+    <item
+        android:title="Tài khoản"
+        android:id="@+id/taikhoan"
+        android:icon="@drawable/ic_taikhoan"
+        app:cnb_backgroundColor="@color/colorPrimary"
+        app:cnb_iconColor="#ffffff"
+        app:cnb_iconTintMode="src_in"
+        app:cnb_textColor="#ffffff"/>
+</menu>
