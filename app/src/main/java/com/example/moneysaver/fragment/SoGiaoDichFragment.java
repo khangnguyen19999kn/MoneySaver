@@ -1,5 +1,6 @@
 package com.example.moneysaver.fragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.moneysaver.LogAdapter;
 import com.example.moneysaver.R;
+import com.example.moneysaver.SqlLiteHelper;
 import com.example.moneysaver.model.LogModel;
 
 import java.util.ArrayList;
@@ -73,59 +75,25 @@ public class SoGiaoDichFragment extends Fragment {
         String [] menuLog = {"Do something!","Do something else","Do homework now","Do you marry me?","Do you know the way","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?"};
         ListView listViewLog = view.findViewById(R.id.listViewLog);
         ArrayList<LogModel> list = new ArrayList<LogModel>();
-        list.add(new LogModel("Cafe",20000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
-        list.add(new LogModel("Trà sữa",60000));
+        LogModel log1 = new LogModel("Cafe",20000,"23/12/2020","cafe.png","khong co chi mo");
+        SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
+        sqlLiteHelper.add(log1);
+
+        Cursor c = sqlLiteHelper.getAll();
+        if (c .moveToNext()) {
+            String ten=  c.getString(1);
+            int tien = c.getInt(2);
+            LogModel log2 = new LogModel(c.getString(1),c.getInt(2),c.getString(3),c.getString(4),c.getString(5));
+
+            int a = 3;
+        }
 
 
 
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,menuLog);
+
+
+
+
         LogAdapter logAdapter = new LogAdapter(this.getActivity(),list);
         listViewLog.setAdapter(logAdapter);
 

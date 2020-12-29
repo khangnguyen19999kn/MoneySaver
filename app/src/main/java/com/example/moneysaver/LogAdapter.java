@@ -55,8 +55,8 @@ public class LogAdapter extends BaseAdapter {
         // Đặt chữ cho từng view trong danh sách.
         TextView nameLog = (TextView) view.findViewById(R.id.nameLogs);
         TextView priceLog = (TextView) view.findViewById(R.id.priceLogs);
-        nameLog.setText(data.get(i).getName());
-        priceLog.setText(data.get(i).getPrice()+"");
+        nameLog.setText(data.get(i).getTenHD());
+        priceLog.setText(data.get(i).getTien()+"");
 
         // Trả về view kết quả.
         return view;
