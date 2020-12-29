@@ -4,10 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.moneysaver.LogAdapter;
 import com.example.moneysaver.R;
+import com.example.moneysaver.model.LogModel;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,8 +66,70 @@ public class SoGiaoDichFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_so_giao_dich, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_so_giao_dich, container, false);
+//
+//        //Set ListView
+        String [] menuLog = {"Do something!","Do something else","Do homework now","Do you marry me?","Do you know the way","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?"};
+        ListView listViewLog = view.findViewById(R.id.listViewLog);
+        ArrayList<LogModel> list = new ArrayList<LogModel>();
+        list.add(new LogModel("Cafe",20000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+        list.add(new LogModel("Trà sữa",60000));
+
+
+
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,menuLog);
+        LogAdapter logAdapter = new LogAdapter(this.getActivity(),list);
+        listViewLog.setAdapter(logAdapter);
+
+        return view;
     }
 
 

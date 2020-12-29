@@ -3,17 +3,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".fragment.SoGiaoDichFragment">
 
 
-       <TextView
+<!--       <TextView-->
+<!--           android:layout_width="match_parent"-->
+<!--           android:layout_height="match_parent"-->
+<!--           android:gravity="center"-->
+<!--           android:textSize="25dp"-->
+
+<!--           android:text=" o(╥﹏╥)o\n\nChạm  + để thêm giao dịch" />-->
+       <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:gravity="center"
-           android:textSize="25dp"
-           android:text=" o(╥﹏╥)o\n\nChạm  + để thêm giao dịch" />
+           android:layout_height="100sp"
+           android:layout_marginTop="100sp"
+           android:orientation="horizontal"
+
+           android:background="#fff">
+
+              <LinearLayout
+                  android:layout_width="200sp"
+                  android:layout_height="100sp"
+                  android:paddingTop="30sp"
+                  android:paddingLeft="10sp"
+                  android:orientation="vertical">
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:textSize="16sp"
+                         android:text="Tiền vào" />
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:textSize="16sp"
+                         android:text="Tiền ra" />
 
 
+              </LinearLayout>
+
+              <LinearLayout
+                  android:layout_width="210sp"
+                  android:layout_height="100sp"
+                  android:paddingTop="30sp"
+                  android:paddingLeft="50sp"
+                  android:paddingRight="50dp"
+                  android:orientation="vertical">
+
+                     <TextView
+
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="50000000"
+                         android:textColor="#4F870E"
+
+                         android:textSize="16sp" />
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:textColor="#F60824"
+
+                         android:text="50000000"
+                         android:textSize="16sp" />
+
+
+              </LinearLayout>
+
+
+       </LinearLayout>
+
+       <ListView
+           android:id="@+id/listViewLog"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_horizontal|bottom"
+           android:layout_marginTop="230sp"
+           android:background="#fff" />
 
 
 </FrameLayout>
