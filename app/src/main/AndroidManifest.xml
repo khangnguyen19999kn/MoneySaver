@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".lapkehoach.NganSachActivity"></activity>
+        <activity android:name=".ActivityDate"></activity>
+        <activity android:name=".lapkehoach.NganSachActivity" />
         <activity android:name=".lapkehoach.SuKienActivity" />
         <activity android:name=".lapkehoach.HoaDonLayout" />
         <activity android:name=".FirstPage" />
@@ -26,12 +27,12 @@
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
