@@ -3,19 +3,16 @@ package com.example.moneysaver.model;
 public class LogModel {
     private String tenHD;
     private int tien;
-    private String ngayThang;
-    private String maIcon;
-    private String ghiChu;
+    private String date;
 
     public LogModel() {
     }
 
-    public LogModel(String tenHD, int tien, String ngayThang, String maIcon, String ghiChu) {
+    public LogModel(String tenHD, int tien, String date) {
         this.tenHD = tenHD;
         this.tien = tien;
-        this.ngayThang = ngayThang;
-        this.maIcon = maIcon;
-        this.ghiChu = ghiChu;
+        this.date = date;
+
     }
 
     public String getTenHD() {
@@ -34,27 +31,11 @@ public class LogModel {
         this.tien = tien;
     }
 
-    public String getNgayThang() {
-        return ngayThang;
+    public String getDate() {
+        return date;
     }
 
-    public void setNgayThang(String ngayThang) {
-        this.ngayThang = ngayThang;
-    }
-
-    public String getMaIcon() {
-        return maIcon;
-    }
-
-    public void setMaIcon(String maIcon) {
-        this.maIcon = maIcon;
-    }
-
-    public String getGhiChu() {
-        return ghiChu;
-    }
-
-    public void setGhiChu(String ghiChu) {
-        this.ghiChu = ghiChu;
+    public void setDate(String date) {
+        this.date = date;
     }
 }

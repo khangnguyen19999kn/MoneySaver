@@ -51,6 +51,7 @@ public class DangNhap extends AppCompatActivity {
         //tao database
         sqLite = new SQLite(this, "taikhoan.sqlite",null, 1);
         sqLite.queryData("CREATE TABLE IF NOT EXISTS user(username VARCHAR(15),  pass VARCHAR(15), status INTEGER, IdVí VARCHAR(15))");
+
 //        sqLite.queryData("INSERT INTO user VALUES ('nct','1234',1,'')");
         checkLogin();
 

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.moneysaver.fragment.SoGiaoDichFragment;
+import com.example.moneysaver.model.ChiTieu;
 import com.example.moneysaver.model.LogModel;
 
 import java.util.ArrayList;
@@ -55,8 +56,10 @@ public class LogAdapter extends BaseAdapter {
         // Đặt chữ cho từng view trong danh sách.
         TextView nameLog = (TextView) view.findViewById(R.id.nameLogs);
         TextView priceLog = (TextView) view.findViewById(R.id.priceLogs);
+        TextView ngayGiaoDich =(TextView) view.findViewById(R.id.ngayGiaoDich);
         nameLog.setText(data.get(i).getTenHD());
-        priceLog.setText(data.get(i).getTien()+"");
+        priceLog.setText(data.get(i).getTien()+" đ");
+        ngayGiaoDich.setText(data.get(i).getDate());
 
         // Trả về view kết quả.
         return view;

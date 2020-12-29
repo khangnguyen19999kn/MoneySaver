@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.moneysaver.LogAdapter;
 import com.example.moneysaver.R;
-import com.example.moneysaver.SqlLiteHelper;
+import com.example.moneysaver.helper.SqlChiTieuHelper;
+import com.example.moneysaver.helper.SqlLoaiHoatDongHelper;
+import com.example.moneysaver.model.ChiTieu;
+import com.example.moneysaver.model.LoaiHoatDong;
 import com.example.moneysaver.model.LogModel;
 
 import java.util.ArrayList;
@@ -72,29 +74,47 @@ public class SoGiaoDichFragment extends Fragment {
         // Inflate the layout for this fragment
 //
 //        //Set ListView
-        String [] menuLog = {"Do something!","Do something else","Do homework now","Do you marry me?","Do you know the way","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?","Do something!","Do something else","Do homework now","Do you marry me?"};
         ListView listViewLog = view.findViewById(R.id.listViewLog);
-        ArrayList<LogModel> list = new ArrayList<LogModel>();
-        LogModel log1 = new LogModel("Cafe",20000,"23/12/2020","cafe.png","khong co chi mo");
-        SqlLiteHelper sqlLiteHelper = new SqlLiteHelper(getContext());
-        sqlLiteHelper.add(log1);
+//        ArrayList<LoaiHoatDong> listLoaiHoatDong = new ArrayList<>();
+//        listLoaiHoatDong.add(new LoaiHoatDong(1001,"Cafe","cafe.png",0));
+//        listLoaiHoatDong.add(new LoaiHoatDong(1002,"Mua sắm","cafe.png",0));
+//        listLoaiHoatDong.add(new LoaiHoatDong(1003,"Thiết bị điện tử","cafe.png",0));
+//        listLoaiHoatDong.add(new LoaiHoatDong(1004,"Nhà Hàng","cafe.png",0));
+//        listLoaiHoatDong.add(new LoaiHoatDong(1005,"Sách Vở","cafe.png",0));
+        SqlLoaiHoatDongHelper loaiHoatDongHelper = new SqlLoaiHoatDongHelper(getContext());
+//
+//        for (LoaiHoatDong loaiHoatDong:
+//             listLoaiHoatDong) {
+//            loaiHoatDongHelper.add(loaiHoatDong);
+//        }
 
-        Cursor c = sqlLiteHelper.getAll();
-        if (c .moveToNext()) {
-            String ten=  c.getString(1);
+
+        ArrayList<ChiTieu> list = new ArrayList<ChiTieu>();
+//
+//        list.add(new ChiTieu(1001,20000,"23/12/2020","Ăn sáng"));
+//        list.add(new ChiTieu(1002,50000,"23/12/2020","Ăn sáng"));
+//        list.add(new ChiTieu(1003,60000,"23/12/2020","Ăn sáng"));
+//        list.add(new ChiTieu(1004,70000,"23/12/2020","Ăn sáng"));
+//        list.add(new ChiTieu(1005,80000,"23/12/2020","Ăn sáng"));
+        SqlChiTieuHelper sqlLiteHelper = new SqlChiTieuHelper(getContext());
+
+//        for (ChiTieu chiTieu:
+//             list) {
+//            sqlLiteHelper.addCtHoatDong(chiTieu);
+//        }
+        ArrayList<LogModel> listResult = new ArrayList<>();
+
+
+        Cursor c = sqlLiteHelper.getAllCtHoatDong();
+        while (c.moveToNext()) {
             int tien = c.getInt(2);
-            LogModel log2 = new LogModel(c.getString(1),c.getInt(2),c.getString(3),c.getString(4),c.getString(5));
 
-            int a = 3;
+           LoaiHoatDong l1 = loaiHoatDongHelper.findOne(c.getInt(1));
+            listResult.add( new LogModel(l1.getTenHoatDong(),tien,c.getString(3)));
+
         }
 
-
-
-
-
-
-
-        LogAdapter logAdapter = new LogAdapter(this.getActivity(),list);
+        LogAdapter logAdapter = new LogAdapter(this.getActivity(),listResult);
         listViewLog.setAdapter(logAdapter);
 
         return view;
