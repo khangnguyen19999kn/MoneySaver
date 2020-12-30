@@ -110,7 +110,7 @@ public class SoGiaoDichFragment extends Fragment {
             int tien = c.getInt(2);
 
            LoaiHoatDong l1 = loaiHoatDongHelper.findOne(c.getInt(1));
-            listResult.add( new LogModel(l1.getTenHoatDong(),tien,c.getString(3)));
+            listResult.add( new LogModel(l1.getTenHoatDong(),tien,c.getString(3),l1.isThu()));
 
         }
 

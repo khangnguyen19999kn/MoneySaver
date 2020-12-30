@@ -58,7 +58,11 @@ public class LogAdapter extends BaseAdapter {
         TextView priceLog = (TextView) view.findViewById(R.id.priceLogs);
         TextView ngayGiaoDich =(TextView) view.findViewById(R.id.ngayGiaoDich);
         nameLog.setText(data.get(i).getTenHD());
-        priceLog.setText(data.get(i).getTien()+" đ");
+        if(data.get(i).getIsThu()==1){
+            priceLog.setText(data.get(i).getTien()+" đ");
+        }else {
+            priceLog.setText("-" +data.get(i).getTien()+" đ");
+        }
         ngayGiaoDich.setText(data.get(i).getDate());
 
         // Trả về view kết quả.
