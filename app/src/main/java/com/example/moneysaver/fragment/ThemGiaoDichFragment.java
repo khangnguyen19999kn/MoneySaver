@@ -1,5 +1,6 @@
 package com.example.moneysaver.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,17 +10,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.moneysaver.ActivityDate;
 import com.example.moneysaver.ChonNhom;
-import com.example.moneysaver.Nhom;
 import com.example.moneysaver.R;
 import com.example.moneysaver.datasource.ChiTieuDataSource;
 import com.example.moneysaver.lapkehoach.HoaDonLayout;
-import com.example.moneysaver.lapkehoach.NganSachActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,6 +35,7 @@ public class ThemGiaoDichFragment extends Fragment {
     TextView chonNhom,ngay;
 
     private ChiTieuDataSource chiTieuDataSource;
+    private static final int REQUEST_CODE_EXAMPLE = 0x9345;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -104,7 +105,7 @@ public class ThemGiaoDichFragment extends Fragment {
             public void onClick(View v) {
                 v.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.anim_click));
                 Intent intent  = new Intent(getActivity(), ChonNhom.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_EXAMPLE);
 
             }
         });
@@ -142,5 +143,19 @@ public class ThemGiaoDichFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_them_giao_dich, container, false);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_EXAMPLE) {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ThemGiaoDichFragment()).commit();
+            if (resultCode == Activity.RESULT_OK) {
+                final String result = String.valueOf(data.getStringExtra("HoatDong"));
+                //result là kqua tra ve ne
+                Toast.makeText(getActivity(), "activityresult" + result, Toast.LENGTH_SHORT).show();
+            } else {
+
+            }
+        }
     }
 }

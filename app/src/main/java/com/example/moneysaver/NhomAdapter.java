@@ -8,14 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.moneysaver.model.Nhom;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class NhomAdapter extends BaseAdapter {
     private Context context;
     private int layout;
-    private List<Nhom> listNhom;
+    private ArrayList<Nhom> listNhom;
 
-    public NhomAdapter(Context context, int layout, List<Nhom> listNhom) {
+    public NhomAdapter(Context context, int layout, ArrayList<Nhom> listNhom) {
         this.context = context;
         this.layout = layout;
         this.listNhom = listNhom;
