@@ -5,89 +5,130 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DangNhap"
+    android:background="#8F8E8E"
     >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true"
+        android:background="#ffffff"
         >
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="100dp"
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:src="@drawable/logo"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
+            app:riv_corner_radius="55dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:textSize="20dp"
             android:layout_gravity="center"
-            android:text="MoneySaver protects your money"/>
+            android:textStyle="bold"
+            android:text="MoneySaver Protects Your Money"/>
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:layout_marginTop="20dp">
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/login"
-                />
-            <EditText
-                android:layout_width="wrap_content"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_id_error"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nhập tên đăng nhập"
-                android:textSize="24dp"
-                android:layout_marginTop="-18dp"
-                android:layout_marginLeft="5dp"
-                android:id="@+id/textid"/>
+                android:hint="Tài khoản"
+                app:boxBackgroundMode="outline"
+                app:errorEnabled="true"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textid"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/wallet"
+                    android:drawablePadding="10dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
             >
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/pass"
-                />
-            <EditText
-                android:layout_width="220dp"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_pass_error"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nhập mật khẩu"
-                android:textSize="24dp"
-                android:layout_marginTop="-18dp"
-                android:layout_marginLeft="5dp"
-                android:inputType="numberPassword"
-                android:ems="10"
-                android:id="@+id/textpass"/>
+                android:hint="Mật khẩu"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true"
+                app:boxBackgroundMode="outline"
+               >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textpass"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/wallet"
+                    android:layout_marginTop="15dp"
+                    android:inputType="textPassword"
+                    android:drawablePadding="10dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đăng Nhập"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:id="@+id/buttonlogin"/>
-        <Button
-            android:layout_width="wrap_content"
+            >
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Đăng Nhập"
+                android:textAlignment="center"
+                android:background="@drawable/botron_button"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:layout_marginLeft="50dp"
+                android:id="@+id/buttonlogin"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đăng Ký"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:id="@+id/buttonregister"/>
+            android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Tạo tài khoản"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="#0877CF"
+                    android:id="@+id/txtregister"/>
+
+        </LinearLayout>
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp" />
     </LinearLayout>
 

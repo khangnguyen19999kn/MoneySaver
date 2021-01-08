@@ -4,84 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DangKy">
+    tools:context=".DangKy"
+    android:background="#8F8E8E"
+    >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true"
         android:gravity="center"
+        android:background="#ffffff"
         >
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center"
+            app:riv_corner_radius="55dp"
+            />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginTop="-10dp"
             android:text="REGISTER"
             android:textSize="20dp"
+            android:textStyle="bold"
+
             />
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:src="@drawable/logo"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tài khoản:"/>
-            <EditText
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:hint="Tài khoản..."
-                android:id="@+id/txtID"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_id_error_register"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
+            android:hint="Tài khoản"
+            app:boxBackgroundMode="outline"
+            app:errorEnabled="true"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtID_register"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Mật khẩu:"/>
-            <EditText
-                android:layout_width="150dp"
+                android:drawableStart="@drawable/wallet"
+                android:drawablePadding="10dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_pass_error_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mật khẩu"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:boxBackgroundMode="outline"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_pass_register"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:hint="Mật khẩu..."
+                android:drawableStart="@drawable/wallet"
+                android:layout_marginTop="15dp"
                 android:inputType="textPassword"
-                android:maxEms="15"
-                android:id="@+id/txtPass1"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
+                android:drawablePadding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_pass2_error_register"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
+            android:hint="Nhập lại mật khẩu"
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            app:boxBackgroundMode="outline"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_pass2_register"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Nhập lại mật khẩu:"
-                android:layout_marginLeft="20dp"/>
-            <EditText
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/wallet"
+                android:layout_marginTop="15dp"
                 android:inputType="textPassword"
-                android:maxEms="15"
-                android:id="@+id/txtPass2"/>
+                android:drawablePadding="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         </LinearLayout>
+
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="15dp"
+            android:weightSum="2"
+            >
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Quay về"
+                android:textColor="#ffffff"
+                android:background="@drawable/botron_button"
                 android:layout_marginTop="10dp"
-                android:id="@+id/btnBack1"/>
+                android:textStyle="bold"
+                android:id="@+id/btnBack"/>
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Tạo tài khoản"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:background="@drawable/botron_button"
                 android:layout_marginTop="10dp"
                 android:id="@+id/btnCreate"/>
         </LinearLayout>
