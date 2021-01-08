@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.moneysaver.ActivityDate;
 import com.example.moneysaver.ChonNhom;
+import com.example.moneysaver.FirstPage;
 import com.example.moneysaver.R;
 import com.example.moneysaver.datasource.ChiTieuDataSource;
 import com.example.moneysaver.lapkehoach.HoaDonLayout;
@@ -90,11 +91,12 @@ public class ThemGiaoDichFragment extends Fragment {
 
                 //insert data
                 chiTieuDataSource = new ChiTieuDataSource(getContext());
-                chiTieuDataSource.createChiTieu(1,Integer.parseInt(tien.getText().toString()),
-                        ngay.getText().toString(),ghiChu.getText().toString(),"user1vi1");
+                chiTieuDataSource.createChiTieu(1001,Integer.parseInt(tien.getText().toString()),
+                        getDate(),ghiChu.getText().toString(),"user1vi1");
+
                 //
                 v.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.anim_click));
-                Intent intent  = new Intent(getActivity(), HoaDonLayout.class);
+                Intent intent  = new Intent(getActivity(), FirstPage.class);
                 startActivity(intent);
 
             }
