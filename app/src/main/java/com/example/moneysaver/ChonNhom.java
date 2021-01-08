@@ -2,11 +2,17 @@ package com.example.moneysaver;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.moneysaver.fragment.ThemGiaoDichFragment;
+import com.example.moneysaver.model.Nhom;
 
 import java.util.ArrayList;
 
@@ -18,6 +24,8 @@ public class ChonNhom extends AppCompatActivity {
     private SQLite dataNhom;
     private NhomAdapter nhomAdapter;
     private ArrayList<Nhom> arrayListNhom;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +47,13 @@ public class ChonNhom extends AppCompatActivity {
         white                       = getColor(R.color.white);
         green                       = getColor(R.color.green);
         text_normal                 = getColor(R.color.textcolor);
+
         //imgBack
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(ChonNhom.this, ThemGiaoDichFragment.class);
+                startActivity(i);
             }
         });
 
@@ -66,7 +76,7 @@ public class ChonNhom extends AppCompatActivity {
                 txt_khoanthu.setTextColor(text_normal);
                 txt_behindkhoanthu.setBackgroundColor(white);
                 arrayListNhom.clear();
-                arrayListNhom.add(new Nhom(R.drawable.ic_thuno, "Thu nợ"));
+                arrayListNhom.add(new Nhom(1,R.drawable.ic_thuno, "Thu nợ"));
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
             }
@@ -83,7 +93,7 @@ public class ChonNhom extends AppCompatActivity {
                 txt_khoanthu.setTextColor(text_normal);
                 txt_behindkhoanthu.setBackgroundColor(white);
                 arrayListNhom.clear();
-                arrayListNhom.add(new Nhom(R.drawable.ic_doan, "Đồ ăn"));
+                arrayListNhom.add(new Nhom(1,R.drawable.ic_doan, "Đồ ăn"));
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
             }
@@ -100,11 +110,30 @@ public class ChonNhom extends AppCompatActivity {
                 txt_khoanchi.setTextColor(text_normal);
                 txt_behindkhoanchi.setBackgroundColor(white);
                 arrayListNhom.clear();
-                arrayListNhom.add(new Nhom(R.drawable.ic_luong, "Lương"));
-                arrayListNhom.add(new Nhom(R.drawable.ic_bando, "Bản đồ"));
+                arrayListNhom.add(new Nhom(1,R.drawable.ic_luong, "Lương"));
+                arrayListNhom.add(new Nhom(2,R.drawable.ic_bando, "Bản đồ"));
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
             }
         });
+        listView_tennhom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Intent data = new Intent();
+                data.putExtra("idLoaiHoatDong", arrayListNhom.get(position).getId());
+                data.putExtra("HoatDong", arrayListNhom.get(position).getTenNhom());
+                setResult(Activity.RESULT_OK,data);
+                finish();
+            }
+        });
     }
+    @Override
+    public void onBackPressed() {
+        // đặt resultCode là Activity.RESULT_CANCELED thể hiện
+        // đã thất bại khi người dùng click vào nút Back.
+        // Khi này sẽ không trả về data.
+        setResult(Activity.RESULT_CANCELED);
+        super.onBackPressed();
+    }
+
 }
