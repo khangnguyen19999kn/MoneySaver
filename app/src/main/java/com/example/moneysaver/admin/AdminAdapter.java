@@ -117,7 +117,7 @@ public class AdminAdapter extends BaseAdapter {
                                if (p.matcher(tv_nhap_mk_dialog.getText()).find()) {
                                    database = FirebaseDatabase.getInstance();
                                    myRef = database.getReference("User");
-                                   User newUser = new User(userList.get(position).getId(), tv_nhap_mk_dialog.getText().toString(), userList.get(position).getStatus(), userList.get(position).getIdVi(),1);
+                                   User newUser = new User(userList.get(position).getId(), tv_nhap_mk_dialog.getText().toString(), userList.get(position).getStatus(), userList.get(position).getIdVi(),userList.get(position).getLevel());
                                    myRef.child(userList.get(position).getId()).setValue(newUser);
                                    Toast.makeText(context, "Đổi mật khẩu tài khoản thành công <3", Toast.LENGTH_SHORT).show();
                                    ad.dismiss();
