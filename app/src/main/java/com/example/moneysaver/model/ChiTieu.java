@@ -6,6 +6,7 @@ public class ChiTieu {
     private long money;
     private String date;
     private String note;
+    private String idVi;
 
     public long getId() {
         return id;
@@ -13,11 +14,20 @@ public class ChiTieu {
     public ChiTieu(){
 
     }
-    public ChiTieu(long idLoaiHoatDong, long money, String date, String note) {
+    public ChiTieu(long idLoaiHoatDong, long money, String date, String note,String idVi) {
         this.idLoaiHoatDong = idLoaiHoatDong;
         this.money = money;
         this.date = date;
         this.note = note;
+        this.idVi = idVi;
+    }
+
+    public String getIdVi() {
+        return idVi;
+    }
+
+    public void setIdVi(String idVi) {
+        this.idVi = idVi;
     }
 
     public void setId(long id) {

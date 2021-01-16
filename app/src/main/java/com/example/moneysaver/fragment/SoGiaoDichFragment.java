@@ -90,12 +90,6 @@ public class SoGiaoDichFragment extends Fragment {
 
 
         ArrayList<ChiTieu> list = new ArrayList<ChiTieu>();
-//
-        list.add(new ChiTieu(1001,20000,"23/12/2020","Ăn sáng"));
-        list.add(new ChiTieu(1002,50000,"23/12/2020","Ăn sáng"));
-        list.add(new ChiTieu(1003,60000,"23/12/2020","Ăn sáng"));
-        list.add(new ChiTieu(1004,70000,"23/12/2020","Ăn sáng"));
-        list.add(new ChiTieu(1005,80000,"23/12/2020","Ăn sáng"));
         SqlChiTieuHelper sqlLiteHelper = new SqlChiTieuHelper(getContext());
 
         for (ChiTieu chiTieu:
