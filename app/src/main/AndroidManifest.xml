@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".admin.AdminPage"></activity>
+        <activity android:name=".ThemKeHoach"></activity>
+        <activity android:name=".admin.AdminPage" />
         <activity android:name=".ActivityDate" />
         <activity android:name=".ChonNhom" />
         <activity android:name=".lapkehoach.NganSachActivity" />
@@ -35,6 +36,7 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
+        <receiver android:name=".lapkehoach.AlarmReceiver" />
     </application>
 
 </manifest>
