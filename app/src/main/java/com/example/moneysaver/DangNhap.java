@@ -15,7 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.moneysaver.model.Student;
+import com.example.moneysaver.admin.AdminPage;
+
 import com.example.moneysaver.model.User;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -100,16 +101,23 @@ public class DangNhap extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 User user = (User) dataSnapshot.getValue(User.class);
-                                if(user.getId().equals(id) && user.getPass().equals(pass)) {
+                                if(user.getId().equals(id) && user.getPass().equals(pass) && user.getLevel() == 1) {
                                     Intent it_nav = new Intent(DangNhap.this, FirstPage.class);
-                                    User changeStatusUser = new User(user.getId(), user.getPass(), 2, "");
+                                    User changeStatusUser = new User(user.getId(), user.getPass(), 2, "",user.getLevel());
                                     reference.child(user.getId()).setValue(changeStatusUser);
                                     success[0] = true;
                                     startActivity(it_nav);
                                     finish();
                                     break;
                                 }
-                            }
+                                if(user.getId().equals(id) && user.getPass().equals(pass) && user.getLevel() == 2) {
+                                    Intent it_nav = new Intent(DangNhap.this, AdminPage.class);
+                                    success[0] = true;
+                                    startActivity(it_nav);
+                                    finish();
+                                    break;
+                                }
+                                }
                             if(!success[0]){
                                 Toast.makeText(DangNhap.this, "Sai thông tin ", Toast.LENGTH_SHORT).show();
                             }
