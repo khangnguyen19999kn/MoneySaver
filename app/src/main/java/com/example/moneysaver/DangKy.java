@@ -49,7 +49,6 @@ public class DangKy extends AppCompatActivity {
         buttonBack              = (Button) findViewById(R.id.btnBack);
         buttonCreate            = (Button) findViewById(R.id.btnCreate);
         intent = new Intent(DangKy.this,DangNhap.class);
-        sqLite = new SQLite(this, "taikhoan.sqlite",null, 1);
         final ArrayList<String>           listString          =   new ArrayList<>();
         final ArrayList<TextInputLayout>  listTextInputLayout =   new ArrayList<>();
         listTextInputLayout.add(txt_layout_id);
@@ -100,7 +99,7 @@ public class DangKy extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 User user = (User) dataSnapshot.getValue(User.class);
-                                if(user.getId().equals(username)) {
+                                if(user.getId().equals(txt_acc.getText().toString())) {
                                     success[0] = true;
                                     txt_layout_id.setError("Tài khoản đã có người đăng ký <3");
                                     break;
@@ -112,7 +111,7 @@ public class DangKy extends AppCompatActivity {
                                     if (p.matcher(pass1).find()) {
                                         database = FirebaseDatabase.getInstance();
                                         myRef = database.getReference("User");
-                                        User newUser = new User(username, pass1, 1, "");
+                                        User newUser = new User(username, pass1, 1, "",1);
                                         myRef.child(username).setValue(newUser);
                                         Toast.makeText(DangKy.this, "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
                                         startActivity(intent);

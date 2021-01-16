@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ActivityDate"></activity>
-        <activity android:name=".ChonNhom"></activity>
+        <activity android:name=".admin.AdminPage"></activity>
+        <activity android:name=".ActivityDate" />
+        <activity android:name=".ChonNhom" />
         <activity android:name=".lapkehoach.NganSachActivity" />
         <activity android:name=".lapkehoach.SuKienActivity" />
         <activity android:name=".lapkehoach.HoaDonLayout" />
