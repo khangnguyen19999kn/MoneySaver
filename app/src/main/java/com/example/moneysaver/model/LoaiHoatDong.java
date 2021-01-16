@@ -47,4 +47,14 @@ public class LoaiHoatDong {
     public void setThu(int thu) {
         isThu = thu;
     }
+
+    @Override
+    public String toString() {
+        return "LoaiHoatDong{" +
+                "id=" + id +
+                ", tenHoatDong='" + tenHoatDong + '\'' +
+                ", maIcon='" + maIcon + '\'' +
+                ", isThu=" + isThu +
+                '}';
+    }
 }

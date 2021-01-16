@@ -75,18 +75,9 @@ public class SoGiaoDichFragment extends Fragment {
 //
 //        //Set ListView
         ListView listViewLog = view.findViewById(R.id.listViewLog);
-        ArrayList<LoaiHoatDong> listLoaiHoatDong = new ArrayList<>();
-        listLoaiHoatDong.add(new LoaiHoatDong(1001,"Cafe","cafe.png",0));
-        listLoaiHoatDong.add(new LoaiHoatDong(1002,"Mua sắm","cafe.png",0));
-        listLoaiHoatDong.add(new LoaiHoatDong(1003,"Thiết bị điện tử","cafe.png",0));
-        listLoaiHoatDong.add(new LoaiHoatDong(1004,"Nhà Hàng","cafe.png",0));
-        listLoaiHoatDong.add(new LoaiHoatDong(1005,"Sách Vở","cafe.png",0));
+
         SqlLoaiHoatDongHelper loaiHoatDongHelper = new SqlLoaiHoatDongHelper(getContext());
 //
-        for (LoaiHoatDong loaiHoatDong:
-             listLoaiHoatDong) {
-            loaiHoatDongHelper.add(loaiHoatDong);
-        }
 
 
         ArrayList<ChiTieu> list = new ArrayList<ChiTieu>();
