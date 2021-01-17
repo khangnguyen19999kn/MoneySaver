@@ -36,7 +36,12 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <receiver android:name=".lapkehoach.AlarmReceiver" />
+        <receiver android:name=".lapkehoach.AlarmReceiver"
+            />
+        <receiver
+            android:name=".lapkehoach.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>
