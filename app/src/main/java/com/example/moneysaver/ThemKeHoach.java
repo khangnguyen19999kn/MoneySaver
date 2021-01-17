@@ -14,12 +14,16 @@ import android.widget.TextView;
 import com.example.moneysaver.datasource.ChiTieuDataSource;
 import com.example.moneysaver.lapkehoach.AlarmReceiver;
 import com.example.moneysaver.lapkehoach.SuKienActivity;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 public class ThemKeHoach extends AppCompatActivity {
     Button btnThemKH;
-    EditText tienKH,ghiChuKH;
-    TextView chonNhomKH,ngayKH;
+    EditText tienKH,ghiChuKH,ngayKH;
+    TextView chonNhomKH;
     private ChiTieuDataSource chiTieuDataSource;
     private static final int REQUEST_CODE_EXAMPLE = 0x9345;
     AlarmManager alarmManager;
@@ -55,7 +59,12 @@ public class ThemKeHoach extends AppCompatActivity {
                         ThemKeHoach.this,0,intentAlamr,PendingIntent.FLAG_UPDATE_CURRENT
                 );
                 calendar = Calendar.getInstance();
-                alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis()+60000,pendingIntent);
+                long timeNow = getTime(calendar.getTime());
+                long timeScheduling = getTime(ngayKH.getText().toString());
+                long time = timeScheduling-timeNow;
+//                alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis()+60000,pendingIntent);
+//                alarmManager.set(AlarmManager.RTC_WAKEUP,getTime(ngayKH.getText().toString())-calendar.getTimeInMillis(),pendingIntent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,time,pendingIntent);
 
                 //
                 v.startAnimation(AnimationUtils.loadAnimation(ThemKeHoach.this,R.anim.anim_click));
@@ -81,7 +90,30 @@ public class ThemKeHoach extends AppCompatActivity {
         String ngay = dinhDangNgay.format(calendar.getTime());
         return ngay;
     }
-    
+    private  long getTime(String date){
+        Calendar calendar = Calendar.getInstance();
+        long time=0;
+        SimpleDateFormat dinhDangNgay = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date dateTime = dinhDangNgay.parse(date);
+            time =dateTime.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return  time;
+    }
+    private  long getTime(Date date){
+        Calendar calendar = Calendar.getInstance();
+        long time=0;
+//        SimpleDateFormat dinhDangNgay = new SimpleDateFormat("dd/MM/yyyy");
+
+            Date dateTime = date;
+            time =dateTime.getTime();
+
+
+        return  time;
+    }
     public void insertData(){
 
                 chiTieuDataSource = new ChiTieuDataSource(ThemKeHoach.this);
