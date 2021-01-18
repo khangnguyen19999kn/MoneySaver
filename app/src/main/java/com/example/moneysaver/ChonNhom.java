@@ -99,21 +99,12 @@ public class ChonNhom extends AppCompatActivity {
                 txt_khoanthu.setTextColor(text_normal);
                 txt_behindkhoanthu.setBackgroundColor(white);
                 arrayListNhom.clear();
-<<<<<<< Updated upstream
-                arrayListNhom.add(new Nhom(1,R.drawable.ic_doan, "Cafe"));
-                arrayListNhom.add(new Nhom(1,R.drawable.coffee, "Cà phê"));
+                arrayListNhom.add(new Nhom(1,R.drawable.ic_doan, "Đồ ăn"));
                 arrayListNhom.add(new Nhom(1,R.drawable.muasam, "Mua sắm"));
                 arrayListNhom.add(new Nhom(1,R.drawable.thietbidientu, "Thiết bị điện tử"));
-                arrayListNhom.add(new Nhom(1,R.drawable.nhahang, "Nhà Hàng"));
-                Toast.makeText(ChonNhom.this, "asd", Toast.LENGTH_SHORT).show();
-=======
-                arrayListNhom.add(new Nhom(1,R.drawable.ic_doan, "Đồ ăn"));
-                arrayListNhom.add(new Nhom(1,R.drawable.ic_nhahang, "Nhà hàng"));
-                arrayListNhom.add(new Nhom(1,R.drawable.muasam, "Mua sắm"));
-                arrayListNhom.add(new Nhom(1,R.drawable.thietbidientu, "Thiết bị điên tử"));
+                arrayListNhom.add(new Nhom(1,R.drawable.nhahang, "Nhà hàng"));
+                arrayListNhom.add(new Nhom(1,R.drawable.coffee, "Cafe"));
                 arrayListNhom.add(new Nhom(1,R.drawable.sachvo, "Sách vở"));
->>>>>>> Stashed changes
-
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
             }
