@@ -1,10 +1,17 @@
 
 package com.example.moneysaver.lapkehoach;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+
+import androidx.core.app.NotificationCompat;
 
 import com.example.moneysaver.FirstPage;
+import com.example.moneysaver.R;
 import com.example.moneysaver.ThemKeHoach;
 import com.example.moneysaver.datasource.ChiTieuDataSource;
 
@@ -20,8 +27,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         intent.getExtras().getString("ghichu");
         chiTieuDataSource.createChiTieu(1001,tien,
                 ngay,ghiChu,"user1vi1");
+
 //        Intent intent2 = new Intent(AlarmReceiver.this, FirstPage.class);
 
 
     }
+
+
 }
