@@ -99,7 +99,7 @@ public class ThemGiaoDichFragment extends Fragment {
 
                 //insert data
                 chiTieuDataSource = new ChiTieuDataSource(getContext());
-                chiTieuDataSource.createChiTieu(1001, Integer.parseInt(tien.getText().toString()),
+                chiTieuDataSource.createChiTieu(idHoatDong, Integer.parseInt(tien.getText().toString()),
                         getDate(), ghiChu.getText().toString(), "user1vi1");
 
                 //

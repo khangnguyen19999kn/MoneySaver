@@ -21,12 +21,14 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         chiTieuDataSource = new ChiTieuDataSource(context);
+        int idLoaiHoatDong = intent.getExtras().getInt("idhoatdong");
         int tien = Integer.parseInt(intent.getExtras().getString("tien"));
         String ngay = intent.getExtras().getString("ngay");
         String ghiChu = intent.getExtras().getString("ghichu");
-        intent.getExtras().getString("ngay");
-        intent.getExtras().getString("ghichu");
-        chiTieuDataSource.createChiTieu(1001,tien,
+//        intent.getExtras().getString("ngay");
+//        intent.getExtras().getString("ghichu");
+//        intent.getExtras().getInt("idhoatdong");
+        chiTieuDataSource.createChiTieu(idLoaiHoatDong,tien,
                 ngay,ghiChu,"user1vi1");
 
 //        Intent intent2 = new Intent(AlarmReceiver.this, FirstPage.class);

@@ -1,5 +1,6 @@
 package com.example.moneysaver.fragment;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,11 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.moneysaver.FirstPage;
 import com.example.moneysaver.LogAdapter;
 import com.example.moneysaver.R;
 import com.example.moneysaver.helper.SqlChiTieuHelper;
@@ -19,6 +22,7 @@ import com.example.moneysaver.helper.SqlLoaiHoatDongHelper;
 import com.example.moneysaver.model.ChiTieu;
 import com.example.moneysaver.model.LoaiHoatDong;
 import com.example.moneysaver.model.LogModel;
+import com.example.moneysaver.model.TienMat;
 import com.example.moneysaver.model.User;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -52,6 +58,7 @@ public class SoGiaoDichFragment extends Fragment {
     private LogModel logModel;
     private ChiTieu chiTieu;
     private List<User> userList;
+    private TextView tienHienCo;
 
     public SoGiaoDichFragment() {
         // Required empty public constructor
@@ -95,9 +102,29 @@ public class SoGiaoDichFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_so_giao_dich, container, false);
         // Inflate the layout for this fragment
         listViewLog = (ListView) view.findViewById(R.id.listViewLog);
+        tienHienCo =(TextView) view.findViewById(R.id.tienHienCo);
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("TienMat");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TienMat tienHT = snapshot.child("1").getValue(TienMat.class);
+                DecimalFormat df = new DecimalFormat("#");
+                df.setMaximumFractionDigits(10);
+                tienHienCo.setText(df.format(tienHT.getTienHT())+" VND");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        //Logs
         DatabaseReference refLog = database.getReference("logs");
         final ArrayList<LogModel> listLog = new ArrayList<>();
 

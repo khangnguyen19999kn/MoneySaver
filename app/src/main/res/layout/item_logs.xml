@@ -59,28 +59,40 @@
             android:id="@+id/priceLogs"/>
 
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#fff">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_alignParentLeft="true"
-            android:text="Ghi chú"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:textColor="#2E2D2D"
-            android:id="@+id/ngayGiaoDich"
-            android:textSize="20dp"
-            android:text="00/00/2020"
-            />
-    </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#fff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:text="Ghi chú" />
+
+            <TextView
+                android:id="@+id/ghichuLog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="58dp"
+                android:layout_marginTop="15dp"
+                android:textSize="10dp"
+                android:text="Ghi chú" />
+
+            <TextView
+                android:id="@+id/ngayGiaoDich"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:text="00/00/2020"
+                android:textColor="#2E2D2D"
+                android:textSize="20dp" />
+        </RelativeLayout>
 
     </LinearLayout>
 

@@ -59,8 +59,10 @@ public class LogAdapter extends BaseAdapter {
         TextView nameLog = (TextView) view.findViewById(R.id.nameLogs);
         TextView priceLog = (TextView) view.findViewById(R.id.priceLogs);
         TextView ngayGiaoDich =(TextView) view.findViewById(R.id.ngayGiaoDich);
+        TextView ghichu = view.findViewById(R.id.ghichuLog);
         iconLog = (ImageView) view.findViewById(R.id.iconLog);
         String alo = data.get(i).getTenHD();
+
 
         if(alo!=null){
             switch(alo) {
@@ -83,10 +85,6 @@ public class LogAdapter extends BaseAdapter {
                     iconLog.setImageResource(R.drawable.wallet);
             }
         }
-
-
-
-
         nameLog.setText(data.get(i).getTenHD());
         if(data.get(i).getIsThu()==1){
             priceLog.setText(data.get(i).getTien()+" đ");
