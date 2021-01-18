@@ -157,11 +157,9 @@ public class ThemGiaoDichFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_them_giao_dich, container, false);
         chonNhom = view.findViewById(R.id.nhom);
         sqLite = new SQLite(getActivity(), "taikhoan.sqlite", null, 1);
-        Toast.makeText(getActivity(), "Hiiiiiiiiiiiiiiiii", Toast.LENGTH_SHORT).show();
         sqLite.queryData("CREATE TABLE IF NOT EXISTS chonnhom(nhom VARCHAR(50))");
         Cursor allFromChonNhom = sqLite.getData("SELECT * FROM chonnhom");
         while (allFromChonNhom.moveToNext()) {
-            Toast.makeText(getActivity(), "" + allFromChonNhom.getString(0), Toast.LENGTH_SHORT).show();
             if (allFromChonNhom.getString(0) != null) {
                 ((TextView) chonNhom).setText(allFromChonNhom.getString(0));
                 for (LoaiHoatDong loaiHoatDong : ListLoaiHoatDongHelper.getListLoaiHD()) {
