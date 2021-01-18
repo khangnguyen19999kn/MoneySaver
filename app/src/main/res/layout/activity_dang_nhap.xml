@@ -95,14 +95,14 @@
             >
 
             <Button
+                android:id="@+id/buttonlogin"
                 android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_height="37dp"
+                android:background="@drawable/botron_button"
                 android:text="Đăng Nhập"
                 android:textAlignment="center"
-                android:background="@drawable/botron_button"
                 android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:id="@+id/buttonlogin"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 

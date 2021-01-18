@@ -2,13 +2,17 @@ package com.example.moneysaver.datasource;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.text.TextUtils;
+import android.view.View;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.moneysaver.FirstPage;
 import com.example.moneysaver.SQLite;
 import com.example.moneysaver.fragment.SoGiaoDichFragment;
 import com.example.moneysaver.helper.ListLoaiHoatDongHelper;
@@ -16,6 +20,7 @@ import com.example.moneysaver.helper.SqlChiTieuHelper;
 import com.example.moneysaver.model.ChiTieu;
 import com.example.moneysaver.model.LoaiHoatDong;
 import com.example.moneysaver.model.LogModel;
+import com.example.moneysaver.model.TienMat;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,7 +56,7 @@ public class ChiTieuDataSource {
     public void close() {
     }
 
-    public void createChiTieu(long idLoaiHoatDong, long money, String date, String note,String idVi) {
+    public void createChiTieu(long idLoaiHoatDong, final long money, String date, String note, String idVi) {
         //create table
 //        String sql = "CREATE TABLE IF NOT EXISTS "
 //                + TABLE_CHITIEU + "( " + COLUMN_ID
@@ -71,6 +76,11 @@ public class ChiTieuDataSource {
         String tenHD = "";
         int isThu = 0;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+
+
+
+                    //lưu log
 
         final DatabaseReference myRef = database.getReference("chitieu");
         final ChiTieu chiTieu = new ChiTieu(idLoaiHoatDong, money, date, note, "user1vi1");
@@ -101,5 +111,34 @@ public class ChiTieuDataSource {
         LogModel log = new LogModel(tenHD, Integer.parseInt(money + ""), date, isThu);
         DatabaseReference refLog = database.getReference("logs");
         refLog.push().setValue(log);
+
+
+      //tinh tien
+        final int checkThu = isThu;
+        DatabaseReference refMoney = database.getReference("TienMat");
+        refMoney.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                double result =0;
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    TienMat tienHT = ds.getValue(TienMat.class);
+                    double tienTon = tienHT.getTienHT();
+                    if(checkThu==1){
+                        result = (tienTon + money);
+                    }else{
+                        result = (tienTon - money);
+                    }
+                }
+                snapshot.child("1").child("tienHT").getRef().setValue(result);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
