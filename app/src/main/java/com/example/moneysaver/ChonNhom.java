@@ -21,7 +21,7 @@ public class ChonNhom extends AppCompatActivity {
     private TextView txt_divayvachovay,txt_khoanchi,txt_khoanthu,txt_behinddivayvachovay,txt_behindkhoanchi,txt_behindkhoanthu;
     private int green,white,text_normal;
     private ListView listView_tennhom;
-    private SQLite dataNhom;
+    private SQLite sqLite;
     private NhomAdapter nhomAdapter;
     private ArrayList<Nhom> arrayListNhom;
 
@@ -120,8 +120,9 @@ public class ChonNhom extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent data = new Intent();
-                data.putExtra("idLoaiHoatDong", arrayListNhom.get(position).getId());
-                data.putExtra("HoatDong", arrayListNhom.get(position).getTenNhom());
+                sqLite = new SQLite(ChonNhom.this, "taikhoan.sqlite",null, 1);
+                sqLite.queryData("DELETE FROM chonnhom");
+                sqLite.queryData("INSERT INTO chonnhom VALUES ('" + arrayListNhom.get(position).getTenNhom() + "')");
                 setResult(Activity.RESULT_OK,data);
                 finish();
             }

@@ -64,10 +64,8 @@ public class DangNhap extends AppCompatActivity {
         listTextInputLayout.add(textInputLayoutPass);
 
         //tao database
-//        sqLite = new SQLite(this, "taikhoan.sqlite",null, 1);
-//        sqLite.queryData("CREATE TABLE IF NOT EXISTS user1(username VARCHAR(15),  pass VARCHAR(15), status INTEGER, IdVí VARCHAR(15))");
-//        sqLite.queryData("INSERT INTO user1 VALUES ('nct','1234',1,'')");
-
+        sqLite = new SQLite(this, "taikhoan.sqlite",null, 1);
+        sqLite.queryData("CREATE TABLE IF NOT EXISTS user1(username VARCHAR(15), pass VARCHAR(15), status INTEGER, IdVí VARCHAR(15), level INTEGER)");
         checkLogin();
 
         //setAction cho button_login
@@ -106,6 +104,8 @@ public class DangNhap extends AppCompatActivity {
                                     User changeStatusUser = new User(user.getId(), user.getPass(), 2, "",user.getLevel());
                                     reference.child(user.getId()).setValue(changeStatusUser);
                                     success[0] = true;
+                                    sqLite.queryData("DELETE FROM user1");
+                                    sqLite.queryData("INSERT INTO user1 VALUES ('" + user.getId() + "','" + user.getPass() + "'," + user.getStatus() + ",'" + user.getIdVi() + "'," + user.getLevel() + ")");
                                     startActivity(it_nav);
                                     finish();
                                     break;
@@ -172,25 +172,14 @@ public class DangNhap extends AppCompatActivity {
     }
 
     public void checkLogin(){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("User");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    User user = (User) dataSnapshot.getValue(User.class);
-                    if(user.getStatus() == 2) {
-                        Intent it_nav = new Intent(DangNhap.this, FirstPage.class);
-                        startActivity(it_nav);
-                        finish();
-                        break;
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        String taikhoan = "";
+        Cursor getAllFromUser1 = sqLite.getData("SELECT * FROM user1");
+        while (getAllFromUser1.moveToNext()){
+            taikhoan = getAllFromUser1.getString(0);
+            Intent it_nav = new Intent(DangNhap.this, FirstPage.class);
+            startActivity(it_nav);
+            finish();
+        }
     }
 
 }

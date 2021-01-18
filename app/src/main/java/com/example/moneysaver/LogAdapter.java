@@ -2,6 +2,7 @@ package com.example.moneysaver;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class LogAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater li;
     private ArrayList<LogModel> data;
+    private  ImageView iconLog;
 
     public LogAdapter(Activity context, ArrayList<LogModel> data) {
         this.activity = context;
@@ -57,13 +59,44 @@ public class LogAdapter extends BaseAdapter {
         TextView nameLog = (TextView) view.findViewById(R.id.nameLogs);
         TextView priceLog = (TextView) view.findViewById(R.id.priceLogs);
         TextView ngayGiaoDich =(TextView) view.findViewById(R.id.ngayGiaoDich);
+        iconLog = (ImageView) view.findViewById(R.id.iconLog);
+        String alo = data.get(i).getTenHD();
+
+        if(alo!=null){
+            switch(alo) {
+                case "Cafe":
+                    iconLog.setImageResource(R.drawable.coffee);
+                    break;
+                case "Thiết bị điện tử":
+                    iconLog.setImageResource(R.drawable.thietbidientu);
+                    break;
+                case "Mua sắm":
+                    iconLog.setImageResource(R.drawable.muasam);
+                    break;
+                case "Sách Vở":
+                    iconLog.setImageResource(R.drawable.sachvo);
+                    break;
+                case "Nhà Hàng":
+                    iconLog.setImageResource(R.drawable.sachvo);
+                    break;
+                default:
+                    iconLog.setImageResource(R.drawable.wallet);
+            }
+        }
+
+
+
+
         nameLog.setText(data.get(i).getTenHD());
         if(data.get(i).getIsThu()==1){
             priceLog.setText(data.get(i).getTien()+" đ");
         }else {
             priceLog.setText("-" +data.get(i).getTien()+" đ");
+            priceLog.setTextColor(Color.RED);
         }
+
         ngayGiaoDich.setText(data.get(i).getDate());
+
 
         // Trả về view kết quả.
         return view;
