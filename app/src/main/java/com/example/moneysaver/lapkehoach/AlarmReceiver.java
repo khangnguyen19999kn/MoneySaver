@@ -1,5 +1,6 @@
 
 package com.example.moneysaver.lapkehoach;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -32,6 +33,13 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
     }
+//    public static PendingIntent getNotificationPendingIntent(Context context, String title, String desc) {
+//        Notification notification = NotificationUtils.buildNotification(context, title, desc);
+//        Intent intent = new Intent(context, AlarmReceiver.class);
+//        intent.putExtra(CommonConstraint.NOTIFICATION_LABEL, notification);
+//        int reqCode = 1;
+//        return PendingIntent.getBroadcast(context, reqCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+//    }
 
 
 }

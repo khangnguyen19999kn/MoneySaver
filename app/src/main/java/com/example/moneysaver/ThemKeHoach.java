@@ -58,7 +58,7 @@ public class ThemKeHoach extends AppCompatActivity {
                 //get data from view
 //                insertData();
                 //
-                addNotification();
+                addNotification(ngayKH.getText().toString());
                 //
                 intentAlamr.putExtra("tien",tienKH.getText().toString());
                 intentAlamr.putExtra("ngay",ngayKH.getText().toString());
@@ -148,9 +148,9 @@ public class ThemKeHoach extends AppCompatActivity {
 
 
     }
-    private  void addNotification(){
+    private  void addNotification(String mesg){
         String title ="MoneySaver";
-        String mes ="đã thêm một giao dịch mới";
+        String mes ="bạn có một kế hoạch giao dịch vào ngày: "+mesg;
         Intent notificationIntent = new Intent(this,FirstPage.class);
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         notificationIntent.putExtra("title", title);
