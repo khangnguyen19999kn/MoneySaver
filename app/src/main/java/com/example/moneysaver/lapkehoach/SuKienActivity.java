@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SuKienActivity extends AppCompatActivity {
     Button btnThemSuKien;
     Button btnVeSoGiaoDich;
+    ListView lv_sukien;
     private static final int REQUEST_CODE_EXAMPLE = 0x9345;
 
     @Override
@@ -33,6 +35,7 @@ public class SuKienActivity extends AppCompatActivity {
 
         btnThemSuKien = findViewById(R.id.btnThemSuKien);
         btnVeSoGiaoDich = findViewById(R.id.btnVeSoGiaoDich);
+        lv_sukien       = findViewById(R.id.listViewSuKien);
         btnThemSuKien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

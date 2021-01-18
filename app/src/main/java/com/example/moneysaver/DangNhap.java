@@ -99,6 +99,7 @@ public class DangNhap extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                                 User user = (User) dataSnapshot.getValue(User.class);
+                                //user dang nhap thanh cong
                                 if(user.getId().equals(id) && user.getPass().equals(pass) && user.getLevel() == 1) {
                                     Intent it_nav = new Intent(DangNhap.this, FirstPage.class);
                                     User changeStatusUser = new User(user.getId(), user.getPass(), 2, "",user.getLevel());
