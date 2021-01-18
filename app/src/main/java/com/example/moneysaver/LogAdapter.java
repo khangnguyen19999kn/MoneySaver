@@ -79,10 +79,13 @@ public class LogAdapter extends BaseAdapter {
                     iconLog.setImageResource(R.drawable.sachvo);
                     break;
                 case "Nhà Hàng":
-                    iconLog.setImageResource(R.drawable.sachvo);
+                    iconLog.setImageResource(R.drawable.nhahang);
+                    break;
+                case "Đồ ăn":
+                    iconLog.setImageResource(R.drawable.food);
                     break;
                 default:
-                    iconLog.setImageResource(R.drawable.wallet);
+                    iconLog.setImageResource(R.drawable.coin);
             }
         }
         nameLog.setText(data.get(i).getTenHD());
