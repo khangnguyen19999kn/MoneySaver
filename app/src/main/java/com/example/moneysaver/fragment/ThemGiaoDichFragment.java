@@ -2,6 +2,7 @@ package com.example.moneysaver.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +20,14 @@ import com.example.moneysaver.ActivityDate;
 import com.example.moneysaver.ChonNhom;
 import com.example.moneysaver.FirstPage;
 import com.example.moneysaver.R;
+import com.example.moneysaver.SQLite;
 import com.example.moneysaver.datasource.ChiTieuDataSource;
+import com.example.moneysaver.helper.ListLoaiHoatDongHelper;
 import com.example.moneysaver.lapkehoach.HoaDonLayout;
+import com.example.moneysaver.model.LoaiHoatDong;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -34,6 +39,8 @@ public class ThemGiaoDichFragment extends Fragment {
     Button btnThem;
     EditText tien,ghiChu;
     TextView chonNhom,ngay;
+    private SQLite sqLite;
+    int idHoatDong;
 
     private ChiTieuDataSource chiTieuDataSource;
     private static final int REQUEST_CODE_EXAMPLE = 0x9345;
@@ -133,7 +140,7 @@ public class ThemGiaoDichFragment extends Fragment {
     private void connect() {
         btnThem = getView().findViewById(R.id.btnThem);
         tien = getView().findViewById(R.id.nhapTien);
-        chonNhom = getView().findViewById(R.id.nhom);
+//        chonNhom = getView().findViewById(R.id.nhom);
         ghiChu = getView().findViewById(R.id.note);
         ngay = getView().findViewById(R.id.ngay);
 
@@ -144,20 +151,25 @@ public class ThemGiaoDichFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_them_giao_dich, container, false);
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_EXAMPLE) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new ThemGiaoDichFragment()).commit();
-            if (resultCode == Activity.RESULT_OK) {
-                final String result = String.valueOf(data.getStringExtra("HoatDong"));
-                //result là kqua tra ve ne
-                Toast.makeText(getActivity(), "activityresult" + result, Toast.LENGTH_SHORT).show();
-            } else {
-
+        View view = inflater.inflate(R.layout.fragment_them_giao_dich, container, false);
+        chonNhom = view.findViewById(R.id.nhom);
+        sqLite = new SQLite(getActivity(), "taikhoan.sqlite",null, 1);
+        sqLite.queryData("CREATE TABLE IF NOT EXISTS chonnhom(nhom VARCHAR(50))");
+        Cursor allFromChonNhom = sqLite.getData("SELECT * FROM chonnhom");
+        while (allFromChonNhom.moveToNext()){
+            if(allFromChonNhom.getString(0) != null){
+                ((TextView)chonNhom).setText(allFromChonNhom.getString(0));
+                for(LoaiHoatDong loaiHoatDong : ListLoaiHoatDongHelper.getListLoaiHD()){
+                    if(loaiHoatDong.getTenHoatDong().equals(allFromChonNhom.getString(0))){
+                        idHoatDong = loaiHoatDong.getId();
+                        Toast.makeText(getActivity(), "" + idHoatDong, Toast.LENGTH_SHORT).show();
+                        sqLite.queryData("DELETE FROM chonnhom");
+                    }
+                }
+            }else{
+                ((TextView)chonNhom).setText("Chọn nhóm");
             }
         }
+        return view;
     }
 }

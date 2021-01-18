@@ -13,6 +13,7 @@ public class ListLoaiHoatDongHelper {
         list.add(new LoaiHoatDong(1003,"Thiết bị điện tử","",0));
         list.add(new LoaiHoatDong(1004,"Nhà Hàng","cafe.png",0));
         list.add(new LoaiHoatDong(1005,"Sách Vở","cafe.png",0));
+        list.add(new LoaiHoatDong(1006,"Đồ ăn","cafe.png",0));
         return list;
     }
 }
