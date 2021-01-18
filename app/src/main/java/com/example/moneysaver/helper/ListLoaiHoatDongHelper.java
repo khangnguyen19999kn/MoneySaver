@@ -14,10 +14,10 @@ public class ListLoaiHoatDongHelper {
         list.add(new LoaiHoatDong(1004,"Nhà hàng","cafe.png",0));
         list.add(new LoaiHoatDong(1005,"Sách vở","cafe.png",0));
         list.add(new LoaiHoatDong(1006,"Đồ ăn","cafe.png",0));
-        list.add(new LoaiHoatDong(1007,"Thu nợ","cafe.png",0));
-        list.add(new LoaiHoatDong(1008,"Lương","cafe.png",0));
-        list.add(new LoaiHoatDong(1009,"Cho vay","cafe.png",0));
-        list.add(new LoaiHoatDong(1010,"Bản đồ","cafe.png",0));
+        list.add(new LoaiHoatDong(1007,"Thu nợ","cafe.png",1));
+        list.add(new LoaiHoatDong(1008,"Lương","cafe.png",1));
+        list.add(new LoaiHoatDong(1009,"Cho vay","cafe.png",1));
+        list.add(new LoaiHoatDong(1010,"Bán đồ","cafe.png",1));
 
         return list;
     }

@@ -70,24 +70,37 @@ public class LogAdapter extends BaseAdapter {
                     iconLog.setImageResource(R.drawable.coffee);
                     break;
                 case "Thiết bị điện tử":
-                    iconLog.setImageResource(R.drawable.thietbidientu);
+                    iconLog.setImageResource(R.drawable.tbdt);
                     break;
                 case "Mua sắm":
-                    iconLog.setImageResource(R.drawable.muasam);
+                    iconLog.setImageResource(R.drawable.shoping);
                     break;
                 case "Sách Vở":
                     iconLog.setImageResource(R.drawable.sachvo);
                     break;
                 case "Nhà Hàng":
-                    iconLog.setImageResource(R.drawable.sachvo);
+                    iconLog.setImageResource(R.drawable.nhahang);
+                    break;
+                case "Đồ ăn":
+                    iconLog.setImageResource(R.drawable.food);
+                    break;
+                case "Thu nợ":
+                    iconLog.setImageResource(R.drawable.thuno);
+                    break;
+                case "Lương":
+                    iconLog.setImageResource(R.drawable.salary);
+                    break;
+                case "Bán đồ":
+                    iconLog.setImageResource(R.drawable.ic_bando);
                     break;
                 default:
-                    iconLog.setImageResource(R.drawable.wallet);
+                    iconLog.setImageResource(R.drawable.coin);
             }
         }
         nameLog.setText(data.get(i).getTenHD());
         if(data.get(i).getIsThu()==1){
-            priceLog.setText(data.get(i).getTien()+" đ");
+            priceLog.setText("+ "+data.get(i).getTien()+" đ");
+            priceLog.setTextColor(Color.GREEN);
         }else {
             priceLog.setText("-" +data.get(i).getTien()+" đ");
             priceLog.setTextColor(Color.RED);
