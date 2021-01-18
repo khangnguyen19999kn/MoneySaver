@@ -216,7 +216,7 @@ public class ThemKeHoach extends AppCompatActivity {
     private  void addNotification(String mesg){
         String title ="MoneySaver";
         String mes ="bạn có một kế hoạch giao dịch vào ngày: "+mesg;
-        Intent notificationIntent = new Intent(this,FirstPage.class);
+        Intent notificationIntent = new Intent(this,SuKienActivity.class);
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         notificationIntent.putExtra("title", title);
         notificationIntent.putExtra("mes", mes);

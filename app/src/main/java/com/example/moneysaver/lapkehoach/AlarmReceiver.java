@@ -42,6 +42,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     private void deleteDataInTableKehoach(int idLoaiHoatDong, int money, String date, String note, String idVi, Context context){
         dbHelper = new SQLite(context, "taikhoan.sqlite",null, 1);
         dbHelper.queryData("DELETE FROM kehoach WHERE idLoaiHoatDong = "+idLoaiHoatDong+" AND money = "+money+" AND date = \""+date+"\" AND note = \""+note+"\" AND idVi = \""+idVi+"\"");
+//        dbHelper.queryData("DELETE FROM kehoach ");
     }
 //    public static PendingIntent getNotificationPendingIntent(Context context, String title, String desc) {
 //        Notification notification = NotificationUtils.buildNotification(context, title, desc);
