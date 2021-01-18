@@ -178,7 +178,7 @@ public class DangNhap extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     User user = (User) dataSnapshot.getValue(User.class);
-                    if(user.getStatus() == 2) {
+                    if(user.getStatus() ==2) {
                         Intent it_nav = new Intent(DangNhap.this, FirstPage.class);
                         startActivity(it_nav);
                         finish();

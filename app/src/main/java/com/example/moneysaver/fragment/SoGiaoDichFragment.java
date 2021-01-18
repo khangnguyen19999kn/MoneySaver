@@ -2,11 +2,14 @@ package com.example.moneysaver.fragment;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.moneysaver.LogAdapter;
@@ -16,8 +19,19 @@ import com.example.moneysaver.helper.SqlLoaiHoatDongHelper;
 import com.example.moneysaver.model.ChiTieu;
 import com.example.moneysaver.model.LoaiHoatDong;
 import com.example.moneysaver.model.LogModel;
+import com.example.moneysaver.model.User;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +48,10 @@ public class SoGiaoDichFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ListView listViewLog;
+    private LogModel logModel;
+    private ChiTieu chiTieu;
+    private List<User> userList;
 
     public SoGiaoDichFragment() {
         // Required empty public constructor
@@ -65,45 +83,61 @@ public class SoGiaoDichFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
+
+
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_so_giao_dich, container, false);
+        final View view = inflater.inflate(R.layout.fragment_so_giao_dich, container, false);
         // Inflate the layout for this fragment
-//
-//        //Set ListView
-        ListView listViewLog = view.findViewById(R.id.listViewLog);
-
-        SqlLoaiHoatDongHelper loaiHoatDongHelper = new SqlLoaiHoatDongHelper(getContext());
-//
+        listViewLog = (ListView) view.findViewById(R.id.listViewLog);
 
 
-        ArrayList<ChiTieu> list = new ArrayList<ChiTieu>();
-        SqlChiTieuHelper sqlLiteHelper = new SqlChiTieuHelper(getContext());
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference refLog = database.getReference("logs");
+        final ArrayList<LogModel> listLog = new ArrayList<>();
 
-        for (ChiTieu chiTieu:
-             list) {
-            sqlLiteHelper.addCtHoatDong(chiTieu);
-        }
-        ArrayList<LogModel> listResult = new ArrayList<>();
-
-
-        Cursor c = sqlLiteHelper.getAllCtHoatDong();
-        while (c.moveToNext()) {
-            int tien = c.getInt(2);
-
-           LoaiHoatDong l1 = loaiHoatDongHelper.findOne(c.getInt(1));
-            listResult.add( new LogModel(l1.getTenHoatDong(),tien,c.getString(3),l1.isThu()));
-
-        }
-
-        LogAdapter logAdapter = new LogAdapter(this.getActivity(),listResult);
+        final LogAdapter logAdapter = new LogAdapter(this.getActivity(),listLog);
         listViewLog.setAdapter(logAdapter);
+
+        refLog.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            listLog.add(snapshot.getValue(LogModel.class));
+            Collections.reverse(listLog);
+            logAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         return view;
     }
+
 
 
 }

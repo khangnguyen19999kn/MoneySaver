@@ -2,17 +2,28 @@ package com.example.moneysaver.datasource;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.moneysaver.SQLite;
+import com.example.moneysaver.fragment.SoGiaoDichFragment;
+import com.example.moneysaver.helper.ListLoaiHoatDongHelper;
+import com.example.moneysaver.helper.SqlChiTieuHelper;
 import com.example.moneysaver.model.ChiTieu;
+import com.example.moneysaver.model.LoaiHoatDong;
+import com.example.moneysaver.model.LogModel;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -25,6 +36,7 @@ public class ChiTieuDataSource {
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_NOTE = "note";
     public static final String COLUMN_ID_VI = "idVi";
+    public ArrayList<LogModel> listLogs;
 
 
     private SQLite dbHelper;
@@ -56,17 +68,19 @@ public class ChiTieuDataSource {
 //                ",\"" + date + "\",\"" + note + "\", \""+idVi+"\")");
 
 
-
+        String tenHD = "";
+        int isThu = 0;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+
         final DatabaseReference myRef = database.getReference("chitieu");
-        final ChiTieu chiTieu = new ChiTieu(idLoaiHoatDong,money,date,note,"user1vi1");
+        final ChiTieu chiTieu = new ChiTieu(idLoaiHoatDong, money, date, note, "user1vi1");
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // getValue() returns Long
                 ArrayList<Object> list = (ArrayList<Object>) dataSnapshot.getValue();
-                myRef.child(list.size()+"").setValue(chiTieu);  // <= Change to ++count
+                myRef.child(list.size() + "").setValue(chiTieu);  // <= Change to ++count
             }
 
             @Override
@@ -75,7 +89,17 @@ public class ChiTieuDataSource {
                 throw databaseError.toException();
             }
         });
-
+        ArrayList<LoaiHoatDong> listLHD = ListLoaiHoatDongHelper.getListLoaiHD();
+        for (LoaiHoatDong item : listLHD) {
+            if (idLoaiHoatDong == item.getId()) {
+                tenHD = item.getTenHoatDong();
+                isThu = item.isThu();
+                break;
+            }
+        }
+        listLogs = new ArrayList<>();
+        LogModel log = new LogModel(tenHD, Integer.parseInt(money + ""), date, isThu);
+        DatabaseReference refLog = database.getReference("logs");
+        refLog.push().setValue(log);
     }
-
 }
