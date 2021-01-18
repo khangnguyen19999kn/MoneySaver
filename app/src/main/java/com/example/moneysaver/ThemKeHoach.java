@@ -60,23 +60,8 @@ public class ThemKeHoach extends AppCompatActivity {
         chonNhomKH = findViewById(R.id.nhomKH);
 
         //
-        sqLite = new SQLite(this, "taikhoan.sqlite",null, 1);
-        sqLite.queryData("CREATE TABLE IF NOT EXISTS chonnhom(nhom VARCHAR(50))");
-        Cursor allFromChonNhom = sqLite.getData("SELECT * FROM chonnhom");
-        while (allFromChonNhom.moveToNext()){
-            if(allFromChonNhom.getString(0) != null){
-                ((TextView)chonNhomKH).setText(allFromChonNhom.getString(0));
-                for(LoaiHoatDong loaiHoatDong : ListLoaiHoatDongHelper.getListLoaiHD()){
-                    if(loaiHoatDong.getTenHoatDong().equals(allFromChonNhom.getString(0))){
-                        idHoatDong = loaiHoatDong.getId();
-                        Toast.makeText(this, "" + idHoatDong, Toast.LENGTH_SHORT).show();
-                        sqLite.queryData("DELETE FROM chonnhom");
-                    }
-                }
-            }else{
-                ((TextView)chonNhomKH).setText("Chọn nhóm");
-            }
-        }
+
+
         //
 
         ngayKH = findViewById(R.id.ngayKH);
@@ -118,10 +103,31 @@ public class ThemKeHoach extends AppCompatActivity {
 
                 v.startAnimation(AnimationUtils.loadAnimation(ThemKeHoach.this,R.anim.anim_click));
                 Intent intent  = new Intent(ThemKeHoach.this, ChonNhom.class);
+
                 startActivityForResult(intent, REQUEST_CODE_EXAMPLE);
             }
         });
 
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Kiểm tra requestCode có trùng với REQUEST_CODE vừa dùng
+        if(requestCode == REQUEST_CODE_EXAMPLE) {
+
+            // resultCode được set bởi DetailActivity
+            // RESULT_OK chỉ ra rằng kết quả này đã thành công
+            if(resultCode == this.RESULT_OK) {
+                // Nhận dữ liệu từ Intent trả về
+                final String result = data.getStringExtra(ChonNhom.EXTRA_DATA);
+
+                // Sử dụng kết quả result bằng cách hiện Toast
+                chonNhomKH.setText(result);
+                Toast.makeText(this, "Result: " + result, Toast.LENGTH_LONG).show();
+            } else {
+                // DetailActivity không thành công, không có data trả về.
+            }
+        }
     }
 
     private String getDate(){

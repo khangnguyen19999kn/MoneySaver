@@ -25,6 +25,8 @@ public class ChonNhom extends AppCompatActivity {
     private NhomAdapter nhomAdapter;
     private ArrayList<Nhom> arrayListNhom;
 
+    public static final String EXTRA_DATA = "EXTRA_DATA";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +125,8 @@ public class ChonNhom extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent data = new Intent();
+                // Truyền data vào intent
+                data.putExtra(EXTRA_DATA, arrayListNhom.get(position).getTenNhom());
                 sqLite.queryData("DELETE FROM chonnhom");
                 sqLite.queryData("INSERT INTO chonnhom VALUES('" + arrayListNhom.get(position).getTenNhom() + "')");
                 setResult(Activity.RESULT_OK,data);
