@@ -42,6 +42,8 @@ public class ChonNhom extends AppCompatActivity {
         txt_behindkhoanthu          = (TextView)  findViewById(R.id.behindKhoanthu);
         listView_tennhom            = (ListView)  findViewById(R.id.list_itemNhom);
         arrayListNhom               = new ArrayList<>();
+        sqLite = new SQLite(ChonNhom.this, "taikhoan.sqlite",null, 1);
+
 
         //color
         white                       = getColor(R.color.white);
@@ -94,6 +96,7 @@ public class ChonNhom extends AppCompatActivity {
                 txt_behindkhoanthu.setBackgroundColor(white);
                 arrayListNhom.clear();
                 arrayListNhom.add(new Nhom(1,R.drawable.ic_doan, "Đồ ăn"));
+
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
             }
@@ -120,9 +123,8 @@ public class ChonNhom extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Intent data = new Intent();
-                sqLite = new SQLite(ChonNhom.this, "taikhoan.sqlite",null, 1);
                 sqLite.queryData("DELETE FROM chonnhom");
-                sqLite.queryData("INSERT INTO chonnhom VALUES ('" + arrayListNhom.get(position).getTenNhom() + "')");
+                sqLite.queryData("INSERT INTO chonnhom VALUES('" + arrayListNhom.get(position).getTenNhom() + "')");
                 setResult(Activity.RESULT_OK,data);
                 finish();
             }
