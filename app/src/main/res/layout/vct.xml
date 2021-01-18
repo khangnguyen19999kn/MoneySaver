@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:gravity="top"
+        android:background="@color/cardview_light_background">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/btnback"
+            android:background="@drawable/botron_button">
+
+        </Button>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ví của tôi"
+            android:textSize="25dp"
+            android:layout_marginTop="-44dp"
+            android:layout_marginLeft="160dp">
+
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tính vào tổng"
+            android:textSize="20dp"
+            android:layout_marginTop="40dp"
+
+            android:background="#E1E4E0">
+
+        </TextView>
+        <LinearLayout
+            android:layout_width="1000dp"
+            android:layout_height="80dp"
+            android:background="#FEFFFD">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cardview_light_background"
+                android:drawableLeft="@drawable/ic_wallet"
+                android:gravity=""
+                android:padding="10dp"
+                android:text="Tiền mặt:"
+
+                android:textAllCaps="false"
+                android:drawableRight="@drawable/ic_launcher">
+
+
+            </Button>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FEFFFD"
+            android:layout_marginTop="-60dp"
+            android:layout_marginLeft="120dp">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền còn"
+                android:id="@+id/tongtiencon"
+                android:textSize="15dp"></EditText>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
