@@ -16,7 +16,11 @@ public class ListLoaiHoatDongHelper {
         list.add(new LoaiHoatDong(1006,"Đồ ăn","cafe.png",0));
         list.add(new LoaiHoatDong(1007,"Thu nợ","cafe.png",0));
         list.add(new LoaiHoatDong(1008,"Lương","cafe.png",0));
+<<<<<<< Updated upstream
         list.add(new LoaiHoatDong(1009,"Cho vay","cafe.png",0));
+=======
+        list.add(new LoaiHoatDong(1009,"Bản đồ","cafe.png",0));
+>>>>>>> Stashed changes
 
         return list;
     }
