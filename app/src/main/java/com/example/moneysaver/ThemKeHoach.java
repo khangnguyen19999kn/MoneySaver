@@ -1,10 +1,15 @@
 package com.example.moneysaver;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -45,12 +50,15 @@ public class ThemKeHoach extends AppCompatActivity {
         chonNhomKH = findViewById(R.id.nhomKH);
         ngayKH = findViewById(R.id.ngayKH);
 
+        createNotificationChannel();
+
         btnThemKH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //get data from view
 //                insertData();
-
+                //
+                addNotification(ngayKH.getText().toString());
                 //
                 intentAlamr.putExtra("tien",tienKH.getText().toString());
                 intentAlamr.putExtra("ngay",ngayKH.getText().toString());
@@ -64,7 +72,7 @@ public class ThemKeHoach extends AppCompatActivity {
                 long time = timeScheduling-timeNow;
 //                alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis()+60000,pendingIntent);
 //                alarmManager.set(AlarmManager.RTC_WAKEUP,getTime(ngayKH.getText().toString())-calendar.getTimeInMillis(),pendingIntent);
-                alarmManager.set(AlarmManager.RTC_WAKEUP,time,pendingIntent);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis()+time,pendingIntent);
 
                 //
                 v.startAnimation(AnimationUtils.loadAnimation(ThemKeHoach.this,R.anim.anim_click));
@@ -126,5 +134,38 @@ public class ThemKeHoach extends AppCompatActivity {
 //        PendingIntent pendingIntent = IntentFactory.getNotificationPendingIntent(this, "ToDo", "DemoToDo");
 //        alarmMng.set(AlarmManager.RTC_WAKEUP, time, pendingIntent);
 //    }
+    private void createNotificationChannel(){
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("channel-th01", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+
+    }
+    private  void addNotification(String mesg){
+        String title ="MoneySaver";
+        String mes ="bạn có một kế hoạch giao dịch vào ngày: "+mesg;
+        Intent notificationIntent = new Intent(this,FirstPage.class);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        notificationIntent.putExtra("title", title);
+        notificationIntent.putExtra("mes", mes);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel-th01")
+                .setSmallIcon(R.drawable.notificationicon2)
+                .setContentTitle(title)
+                .setContentText(mes)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0,builder.build());
+
+    }
 
 }
