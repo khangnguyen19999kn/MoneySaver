@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +17,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.moneysaver.datasource.ChiTieuDataSource;
+import com.example.moneysaver.helper.ListLoaiHoatDongHelper;
 import com.example.moneysaver.lapkehoach.AlarmReceiver;
 import com.example.moneysaver.lapkehoach.SuKienActivity;
+import com.example.moneysaver.model.ChiTieu;
+import com.example.moneysaver.model.LoaiHoatDong;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,6 +41,9 @@ public class ThemKeHoach extends AppCompatActivity {
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
     Calendar calendar;
+
+    private SQLite sqLite;
+    int idHoatDong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,27 @@ public class ThemKeHoach extends AppCompatActivity {
         tienKH = findViewById(R.id.nhapTienKH);
         ghiChuKH = findViewById(R.id.noteKH);
         chonNhomKH = findViewById(R.id.nhomKH);
+
+        //
+        sqLite = new SQLite(this, "taikhoan.sqlite",null, 1);
+        sqLite.queryData("CREATE TABLE IF NOT EXISTS chonnhom(nhom VARCHAR(50))");
+        Cursor allFromChonNhom = sqLite.getData("SELECT * FROM chonnhom");
+        while (allFromChonNhom.moveToNext()){
+            if(allFromChonNhom.getString(0) != null){
+                ((TextView)chonNhomKH).setText(allFromChonNhom.getString(0));
+                for(LoaiHoatDong loaiHoatDong : ListLoaiHoatDongHelper.getListLoaiHD()){
+                    if(loaiHoatDong.getTenHoatDong().equals(allFromChonNhom.getString(0))){
+                        idHoatDong = loaiHoatDong.getId();
+                        Toast.makeText(this, "" + idHoatDong, Toast.LENGTH_SHORT).show();
+                        sqLite.queryData("DELETE FROM chonnhom");
+                    }
+                }
+            }else{
+                ((TextView)chonNhomKH).setText("Chọn nhóm");
+            }
+        }
+        //
+
         ngayKH = findViewById(R.id.ngayKH);
 
         createNotificationChannel();
@@ -84,6 +115,7 @@ public class ThemKeHoach extends AppCompatActivity {
         chonNhomKH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 v.startAnimation(AnimationUtils.loadAnimation(ThemKeHoach.this,R.anim.anim_click));
                 Intent intent  = new Intent(ThemKeHoach.this, ChonNhom.class);
                 startActivityForResult(intent, REQUEST_CODE_EXAMPLE);
