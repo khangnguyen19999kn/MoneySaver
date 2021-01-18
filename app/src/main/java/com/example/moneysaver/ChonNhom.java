@@ -79,6 +79,7 @@ public class ChonNhom extends AppCompatActivity {
                 txt_behindkhoanthu.setBackgroundColor(white);
                 arrayListNhom.clear();
                 arrayListNhom.add(new Nhom(1,R.drawable.ic_thuno, "Thu nợ"));
+                arrayListNhom.add(new Nhom(1,R.drawable.chovay, "Cho vay"));
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
             }
@@ -95,7 +96,12 @@ public class ChonNhom extends AppCompatActivity {
                 txt_khoanthu.setTextColor(text_normal);
                 txt_behindkhoanthu.setBackgroundColor(white);
                 arrayListNhom.clear();
-                arrayListNhom.add(new Nhom(1,R.drawable.ic_doan, "Đồ ăn"));
+                arrayListNhom.add(new Nhom(1,R.drawable.ic_doan, "Cafe"));
+                arrayListNhom.add(new Nhom(1,R.drawable.coffee, "Cà phê"));
+                arrayListNhom.add(new Nhom(1,R.drawable.muasam, "Mua sắm"));
+                arrayListNhom.add(new Nhom(1,R.drawable.thietbidientu, "Thiết bị điện tử"));
+                arrayListNhom.add(new Nhom(1,R.drawable.nhahang, "Nhà Hàng"));
+
 
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
