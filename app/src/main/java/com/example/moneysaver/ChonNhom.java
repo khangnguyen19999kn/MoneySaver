@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.moneysaver.fragment.ThemGiaoDichFragment;
 import com.example.moneysaver.model.Nhom;
@@ -103,7 +104,7 @@ public class ChonNhom extends AppCompatActivity {
                 arrayListNhom.add(new Nhom(1,R.drawable.muasam, "Mua sắm"));
                 arrayListNhom.add(new Nhom(1,R.drawable.thietbidientu, "Thiết bị điện tử"));
                 arrayListNhom.add(new Nhom(1,R.drawable.nhahang, "Nhà Hàng"));
-
+                Toast.makeText(ChonNhom.this, "asd", Toast.LENGTH_SHORT).show();
 
                 nhomAdapter = new NhomAdapter(ChonNhom.this,R.layout.nhom_chinh,arrayListNhom);
                 listView_tennhom.setAdapter(nhomAdapter);
