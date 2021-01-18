@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +17,18 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.moneysaver.datasource.ChiTieuDataSource;
+import com.example.moneysaver.helper.ListLoaiHoatDongHelper;
 import com.example.moneysaver.lapkehoach.AlarmReceiver;
 import com.example.moneysaver.lapkehoach.SuKienActivity;
+import com.example.moneysaver.model.ChiTieu;
+import com.example.moneysaver.model.LoaiHoatDong;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,6 +41,8 @@ public class ThemKeHoach extends AppCompatActivity {
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
     Calendar calendar;
+
+    int idHoatDong=1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,7 @@ public class ThemKeHoach extends AppCompatActivity {
                 intentAlamr.putExtra("tien",tienKH.getText().toString());
                 intentAlamr.putExtra("ngay",ngayKH.getText().toString());
                 intentAlamr.putExtra("ghichu",ghiChuKH.getText().toString());
+                intentAlamr.putExtra("idhoatdong",idHoatDong);
                 pendingIntent = PendingIntent.getBroadcast(
                         ThemKeHoach.this,0,intentAlamr,PendingIntent.FLAG_UPDATE_CURRENT
                 );
@@ -84,12 +94,39 @@ public class ThemKeHoach extends AppCompatActivity {
         chonNhomKH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 v.startAnimation(AnimationUtils.loadAnimation(ThemKeHoach.this,R.anim.anim_click));
                 Intent intent  = new Intent(ThemKeHoach.this, ChonNhom.class);
+
                 startActivityForResult(intent, REQUEST_CODE_EXAMPLE);
             }
         });
 
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Kiểm tra requestCode có trùng với REQUEST_CODE vừa dùng
+        if(requestCode == REQUEST_CODE_EXAMPLE) {
+
+            // resultCode được set bởi DetailActivity
+            // RESULT_OK chỉ ra rằng kết quả này đã thành công
+            if(resultCode == this.RESULT_OK) {
+                // Nhận dữ liệu từ Intent trả về
+                final String result = data.getStringExtra(ChonNhom.EXTRA_DATA);
+
+                // Sử dụng kết quả result bằng cách hiện Toast
+                chonNhomKH.setText(result);
+                for (LoaiHoatDong loaiHoatDong : ListLoaiHoatDongHelper.getListLoaiHD()) {
+                    if (loaiHoatDong.getTenHoatDong().equals(result)) {
+                        idHoatDong = loaiHoatDong.getId();
+                    }
+                }
+//                Toast.makeText(this, "Result: " + result, Toast.LENGTH_LONG).show();
+            } else {
+                // DetailActivity không thành công, không có data trả về.
+            }
+        }
     }
 
     private String getDate(){
@@ -122,13 +159,13 @@ public class ThemKeHoach extends AppCompatActivity {
 
         return  time;
     }
-    public void insertData(){
-
-                chiTieuDataSource = new ChiTieuDataSource(ThemKeHoach.this);
-                chiTieuDataSource.createChiTieu(1001,Integer.parseInt(tienKH.getText().toString()),
-                        ngayKH.getText().toString(),ghiChuKH.getText().toString(),"user1vi1");
-
-    }
+//    public void insertData(){
+//
+//                chiTieuDataSource = new ChiTieuDataSource(ThemKeHoach.this);
+//                chiTieuDataSource.createChiTieu(1001,Integer.parseInt(tienKH.getText().toString()),
+//                        ngayKH.getText().toString(),ghiChuKH.getText().toString(),"user1vi1");
+//
+//    }
 //    private void scheduleNotification(Context context, long time, int idToDo) {
 //        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 //        PendingIntent pendingIntent = IntentFactory.getNotificationPendingIntent(this, "ToDo", "DemoToDo");

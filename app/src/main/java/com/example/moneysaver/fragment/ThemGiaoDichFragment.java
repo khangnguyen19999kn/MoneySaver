@@ -37,8 +37,8 @@ import java.util.Calendar;
  */
 public class ThemGiaoDichFragment extends Fragment {
     Button btnThem;
-    EditText tien,ghiChu;
-    TextView chonNhom,ngay;
+    EditText tien, ghiChu;
+    TextView chonNhom, ngay;
     private SQLite sqLite;
     int idHoatDong;
 
@@ -87,6 +87,7 @@ public class ThemGiaoDichFragment extends Fragment {
         }
 
     }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         connect();
@@ -98,12 +99,12 @@ public class ThemGiaoDichFragment extends Fragment {
 
                 //insert data
                 chiTieuDataSource = new ChiTieuDataSource(getContext());
-                chiTieuDataSource.createChiTieu(1001,Integer.parseInt(tien.getText().toString()),
-                        getDate(),ghiChu.getText().toString(),"user1vi1");
+                chiTieuDataSource.createChiTieu(idHoatDong, Integer.parseInt(tien.getText().toString()),
+                        getDate(), ghiChu.getText().toString(), "user1vi1");
 
                 //
-                v.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.anim_click));
-                Intent intent  = new Intent(getActivity(), FirstPage.class);
+                v.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_click));
+                Intent intent = new Intent(getActivity(), FirstPage.class);
                 startActivity(intent);
 
             }
@@ -112,8 +113,8 @@ public class ThemGiaoDichFragment extends Fragment {
         chonNhom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.anim_click));
-                Intent intent  = new Intent(getActivity(), ChonNhom.class);
+                v.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_click));
+                Intent intent = new Intent(getActivity(), ChonNhom.class);
                 startActivityForResult(intent, REQUEST_CODE_EXAMPLE);
 
             }
@@ -122,20 +123,22 @@ public class ThemGiaoDichFragment extends Fragment {
         ngay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(AnimationUtils.loadAnimation(getActivity(),R.anim.anim_click));
-                Intent intent  = new Intent(getActivity(), ActivityDate.class);
+                v.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_click));
+                Intent intent = new Intent(getActivity(), ActivityDate.class);
                 startActivity(intent);
 
             }
         });
 
     }
-    private String getDate(){
+
+    private String getDate() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dinhDangNgay = new SimpleDateFormat("dd/MM/yyyy");
         String ngay = dinhDangNgay.format(calendar.getTime());
         return ngay;
     }
+
     //
     private void connect() {
         btnThem = getView().findViewById(R.id.btnThem);
@@ -153,23 +156,32 @@ public class ThemGiaoDichFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_them_giao_dich, container, false);
         chonNhom = view.findViewById(R.id.nhom);
-        sqLite = new SQLite(getActivity(), "taikhoan.sqlite",null, 1);
+        sqLite = new SQLite(getActivity(), "taikhoan.sqlite", null, 1);
         sqLite.queryData("CREATE TABLE IF NOT EXISTS chonnhom(nhom VARCHAR(50))");
         Cursor allFromChonNhom = sqLite.getData("SELECT * FROM chonnhom");
-        while (allFromChonNhom.moveToNext()){
-            if(allFromChonNhom.getString(0) != null){
-                ((TextView)chonNhom).setText(allFromChonNhom.getString(0));
-                for(LoaiHoatDong loaiHoatDong : ListLoaiHoatDongHelper.getListLoaiHD()){
-                    if(loaiHoatDong.getTenHoatDong().equals(allFromChonNhom.getString(0))){
+        while (allFromChonNhom.moveToNext()) {
+            if (allFromChonNhom.getString(0) != null) {
+                ((TextView) chonNhom).setText(allFromChonNhom.getString(0));
+                for (LoaiHoatDong loaiHoatDong : ListLoaiHoatDongHelper.getListLoaiHD()) {
+                    if (loaiHoatDong.getTenHoatDong().equals(allFromChonNhom.getString(0))) {
                         idHoatDong = loaiHoatDong.getId();
-                        Toast.makeText(getActivity(), "" + idHoatDong, Toast.LENGTH_SHORT).show();
                         sqLite.queryData("DELETE FROM chonnhom");
                     }
                 }
-            }else{
-                ((TextView)chonNhom).setText("Chọn nhóm");
+            } else {
+                ((TextView) chonNhom).setText("Chọn nhóm");
             }
         }
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,new ThemGiaoDichFragment()).commit();
+        if (requestCode == REQUEST_CODE_EXAMPLE) {
+            if (resultCode == Activity.RESULT_OK) {
+            }
+        }
     }
 }
