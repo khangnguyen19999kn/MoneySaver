@@ -13,10 +13,12 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.moneysaver.FirstPage;
 import com.example.moneysaver.R;
+import com.example.moneysaver.SQLite;
 import com.example.moneysaver.ThemKeHoach;
 import com.example.moneysaver.datasource.ChiTieuDataSource;
 
 public class AlarmReceiver extends BroadcastReceiver {
+    private SQLite dbHelper;
     private ChiTieuDataSource chiTieuDataSource;
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -30,10 +32,16 @@ public class AlarmReceiver extends BroadcastReceiver {
 //        intent.getExtras().getInt("idhoatdong");
         chiTieuDataSource.createChiTieu(idLoaiHoatDong,tien,
                 ngay,ghiChu,"user1vi1");
+        deleteDataInTableKehoach(idLoaiHoatDong,tien,ngay,ghiChu,"user1vi1",context);
+
 
 //        Intent intent2 = new Intent(AlarmReceiver.this, FirstPage.class);
 
 
+    }
+    private void deleteDataInTableKehoach(int idLoaiHoatDong, int money, String date, String note, String idVi, Context context){
+        dbHelper = new SQLite(context, "taikhoan.sqlite",null, 1);
+        dbHelper.queryData("DELETE FROM kehoach WHERE idLoaiHoatDong = "+idLoaiHoatDong+" AND money = "+money+" AND date = \""+date+"\" AND note = \""+note+"\" AND idVi = \""+idVi+"\"");
     }
 //    public static PendingIntent getNotificationPendingIntent(Context context, String title, String desc) {
 //        Notification notification = NotificationUtils.buildNotification(context, title, desc);

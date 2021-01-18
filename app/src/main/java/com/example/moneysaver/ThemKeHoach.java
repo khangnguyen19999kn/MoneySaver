@@ -42,6 +42,7 @@ public class ThemKeHoach extends AppCompatActivity {
     PendingIntent pendingIntent;
     Calendar calendar;
 
+    private SQLite dbHelper;
     int idHoatDong=1001;
 
     @Override
@@ -64,8 +65,10 @@ public class ThemKeHoach extends AppCompatActivity {
         btnThemKH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get data from view
-//                insertData();
+                createTableKeHoach();
+                insertDataIntoTableKehoach(idHoatDong,Integer.parseInt(tienKH.getText().toString()),ngayKH.getText().toString(),
+                        ghiChuKH.getText().toString(),"user1vi1" );
+
                 //
                 addNotification(ngayKH.getText().toString());
                 //
@@ -159,7 +162,32 @@ public class ThemKeHoach extends AppCompatActivity {
 
         return  time;
     }
-//    public void insertData(){
+//    create table
+    private void createTableKeHoach(){
+        dbHelper = new SQLite(this, "taikhoan.sqlite",null, 1);
+        String sql = "CREATE TABLE IF NOT EXISTS "
+                + "kehoach" + "( " + "id"
+                + " integer primary key autoincrement, " + "idLoaiHoatDong"
+                + " interger not null, "+ "money"
+                + " text not null, "+ "date"
+                + " text not null, "+ "note"
+                + " text, "+"idVi"+ " text not null );";
+        dbHelper.queryData(sql);
+
+    }
+    private void insertDataIntoTableKehoach(int idLoaiHoatDong, int money, String date, String note, String idVi){
+        dbHelper = new SQLite(this, "taikhoan.sqlite",null, 1);
+        dbHelper.queryData("INSERT INTO kehoach (idLoaiHoatDong,money,date,note,idVi) VALUES ("+idLoaiHoatDong+","+money+
+                ",\"" + date + "\",\"" + note + "\", \""+idVi+"\")");
+    }
+
+
+
+
+
+
+
+    //    public void insertData(){
 //
 //                chiTieuDataSource = new ChiTieuDataSource(ThemKeHoach.this);
 //                chiTieuDataSource.createChiTieu(1001,Integer.parseInt(tienKH.getText().toString()),
